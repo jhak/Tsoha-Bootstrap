@@ -14,3 +14,4 @@ Staattiset näkymät
 * [Muokkaus](http://jehajeha.users.cs.helsinki.fi/drinkkiarkisto/suunnitelmat/muokkaus)
 * [Login](http://jehajeha.users.cs.helsinki.fi/drinkkiarkisto/suunnitelmat/login)
 * [Listaus](http://jehajeha.users.cs.helsinki.fi/drinkkiarkisto/suunnitelmat/drinkkilistaus)
+* [Tarkastelu](http://jehajeha.users.cs.helsinki.fi/drinkkiarkisto/suunnitelmat/tarkastelu)
