@@ -3,14 +3,14 @@
   <h1>Drinkit</h1>
 
   <p>
-    <a href="#" class="btn btn-success">Ehdota drinkkiä</a>
-    <a href="#" class="btn btn-success">Hae</a>
-    <a href="#" class="btn btn-success">Tyhjennä haku</a>
+    <a href="#" class="btn btn-success">Ehdota drinkkiä</a>  
+    <input class="btn btn-success" value="Tyhjennä haku" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus'">
+    <input class="btn btn-success" value="Hae" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus?srch='+ document.getElementById('hakukentta').value;">
   </p>
 
   <div class="form-group">
       <label>Hakusana</label>
-      <input class="form-control" value="" type="text">
+      <input class="form-control" value="" type="text" id="hakukentta">
   </div>
 
   <table class="table table-striped table-bordered">
@@ -23,7 +23,32 @@
         <th></th>
       </tr>
     </thead>
-
+{% if srch %}
+    <tbody>
+      {% for drink in drinks %}
+      {% if drink.approved == true %}
+      {% if drink.name in srch %}
+      <tr>
+        <td><a href="{{base_path}}/tarkastelu/{{drink.drink_id}}">{{drink.name}}</a></td>
+        <td>{% for ingredient in ingredients %} 
+          {% if ingredient.drink_id == drink.drink_id %}
+              {{ingredient.ingrd_name}} 
+          {% endif %}
+        {% endfor %}
+        </td>
+        <td>{{drink.created}}</td>
+        <td>{% for Usraccount in Usraccounts %}
+         {% if Usraccount.usr_id == drink.usr_id %}
+              {{Usraccount.usr_name}} 
+          {% endif %}
+        {% endfor %}</td>
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
+      </tr>
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </tbody>
+{% else %}
     <tbody>
       {% for drink in drinks %}
       {% if drink.approved == true %}
@@ -41,10 +66,12 @@
               {{Usraccount.usr_name}} 
           {% endif %}
         {% endfor %}</td>
-        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
       </tr>
       {% endif %}
       {% endfor %}
     </tbody>
+{% endif %}
   </table>
+
 {% endblock %}

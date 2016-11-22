@@ -11,13 +11,22 @@
   $routes->get('/', function() {
     DrinkArchiveController::logon();
   });
-
+/*
   $routes->get('/drinkkilistaus', function() {
   DrinkArchiveController::drinklist();
+}); */
+
+  $routes->get('/drinkkilistaus', function () use ($routes) {
+          $srch = $routes->request()->params('srch');
+          DrinkArchiveController::drinklist($srch);
 });
 
 $routes->get('/tarkastelu/:id', function($id){
   DrinkArchiveController::fetchDetails($id);
+});
+
+$routes->get('/muokkaus/:id', function($id){
+  DrinkArchiveController::fetchDetailsMod($id);
 });
 
   $routes->get('/suunnitelmat/drinkkilistaus', function() {
