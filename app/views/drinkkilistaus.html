@@ -25,14 +25,26 @@
     </thead>
 
     <tbody>
-      <!-- Listataan pelit tähän -->
+      {% for drink in drinks %}
+      {% if drink.approved == true %}
       <tr>
-        <td><a href="#">Viskikola</a></td>
-        <td>Viski, Coca-Cola</td>
-        <td>99.99.9999</td>
-        <td>Anon</td>
+        <td><a href="{{base_path}}/tarkastelu/{{drink.drink_id}}">{{drink.name}}</a></td>
+        <td>{% for ingredient in ingredients %} 
+          {% if ingredient.drink_id == drink.drink_id %}
+              {{ingredient.ingrd_name}} 
+          {% endif %}
+        {% endfor %}
+        </td>
+        <td>{{drink.created}}</td>
+        <td>{% for Usraccount in Usraccounts %}
+         {% if Usraccount.usr_id == drink.usr_id %}
+              {{Usraccount.usr_name}} 
+          {% endif %}
+        {% endfor %}</td>
         <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
       </tr>
+      {% endif %}
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

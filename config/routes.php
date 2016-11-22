@@ -16,7 +16,9 @@
   DrinkArchiveController::drinklist();
 });
 
-
+$routes->get('/tarkastelu/:id', function($id){
+  DrinkArchiveController::fetchDetails($id);
+});
 
   $routes->get('/suunnitelmat/drinkkilistaus', function() {
   HelloWorldController::drinklist();
