@@ -27,7 +27,7 @@ class Ingredient extends BaseModel{
       return $ingredients;
     }
 
-        public static function All(){
+    public static function All(){
     $query = DB::connection()->prepare('SELECT * FROM Ingredient');
     $query->execute();
     $rows = $query->fetchAll();
@@ -45,7 +45,22 @@ class Ingredient extends BaseModel{
       return $ingredients;
     }
 
+    public static function delete($id){
+      $query = DB::connection()->prepare('SELECT * FROM Ingredient where ingrd_id = :id');
+      $query->execute(array('id' => $id));
 
+    }
+
+    public function add() {
+    $query = DB::connection()->prepare('INSERT INTO Ingredient (ingrd_name, drink_id, amount, amount_type) VALUES (:ingrd_name, :drink_id, :amount, :amount_type) RETURNING ingrd_id');
+    
+    $query->execute(array('ingrd_name' => $this->ingrd_name, 'drink_id' => $this->drink_id, 'amount' => $this->amount, 'amount_type' => $this->amount_type));
+
+    $row = $query->fetch();
+    
+    $this->id = $row['ingrd_id']; 
+
+    }
     
 
 

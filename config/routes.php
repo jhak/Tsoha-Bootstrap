@@ -21,6 +21,10 @@
           DrinkArchiveController::drinklist($srch);
 });
 
+    $routes->post('/addIngrd', function () {
+      DrinkArchiveController::addNewIngrd();
+});
+
 $routes->get('/tarkastelu/:id', function($id){
   DrinkArchiveController::fetchDetails($id);
 });

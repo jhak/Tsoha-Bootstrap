@@ -29,6 +29,22 @@ class DrinkArchiveController extends BaseController{
     View::make('muokkaus.html', array('drink' => $drink, 'ingredients' => $ingredients, 'Usraccount' => $Usraccount));
   }
 
+  public static function addNewIngrd(){
+    $params = $_POST;
+    
+    $ingredient = new Ingredient(array(
+      'ingrd_name' => $params['ingrd_name'],
+      'drink_id' => $params['drink_id'],
+      'amount' => $params['amount'],
+      'amount_type' => $params['amount_type']
+    ));
+
+    
+    $ingredient->add();
+
+    Redirect::to('/muokkaus/' . $ingredient->drink_id);
+  }
+
     public static function logon(){
     View::make('loginpage.html');
   }
