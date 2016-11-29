@@ -28,7 +28,19 @@ class DrinkArchiveController extends BaseController{
     $Usraccount = Usraccount::getName($drink -> usr_id);
     View::make('muokkaus.html', array('drink' => $drink, 'ingredients' => $ingredients, 'Usraccount' => $Usraccount));
   }
+  
+  public static function suggestion(){
+        View::make('ehdotus.html');
+  }
+  
+  public static function delIngrd(){
+    $params = $_POST;
+    
+    Ingredient::delete($params['ingrd_id']);
 
+    Redirect::to('/muokkaus/' . $params['drink_id']);
+  }
+  
   public static function addNewIngrd(){
     $params = $_POST;
     

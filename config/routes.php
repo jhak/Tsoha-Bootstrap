@@ -24,6 +24,13 @@
     $routes->post('/addIngrd', function () {
       DrinkArchiveController::addNewIngrd();
 });
+    
+$routes->post('/delIngrd', function () {
+      DrinkArchiveController::delIngrd();
+});
+$routes->get('/ehdotus', function () {
+      DrinkArchiveController::suggestion();
+});
 
 $routes->get('/tarkastelu/:id', function($id){
   DrinkArchiveController::fetchDetails($id);

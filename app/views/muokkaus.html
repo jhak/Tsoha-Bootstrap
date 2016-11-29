@@ -23,11 +23,13 @@
 
     <tbody>
     {% for ingredient in ingredients %}
-     <form>
+     <form method = "post" action="{{base_path}}/delIngrd">
+      <input class="hidden" name="ingrd_id" value="{{ingredient.ingrd_id}}" type="text">
+      <input class="hidden" name="drink_id" value="{{drink.drink_id}}" type="text">
       <tr>
         <td>{{ingredient.ingrd_name}}</td>
         <td>{{ingredient.amount}}{{ingredient.amount_type}}</td>
-        <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>
+        <th><button type="submit" class="btn btn-primary">Poista</button></th>
       </tr>
      </form>
     {% endfor %}

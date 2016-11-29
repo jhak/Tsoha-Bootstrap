@@ -46,7 +46,7 @@ class Ingredient extends BaseModel{
     }
 
     public static function delete($id){
-      $query = DB::connection()->prepare('SELECT * FROM Ingredient where ingrd_id = :id');
+      $query = DB::connection()->prepare('Delete FROM Ingredient where ingrd_id = :id');
       $query->execute(array('id' => $id));
 
     }
@@ -58,7 +58,7 @@ class Ingredient extends BaseModel{
 
     $row = $query->fetch();
     
-    $this->id = $row['ingrd_id']; 
+    $this->ingrd_id = $row['ingrd_id']; 
 
     }
     
