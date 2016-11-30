@@ -31,7 +31,9 @@ $routes->post('/delIngrd', function () {
 $routes->get('/ehdotus', function () {
       DrinkArchiveController::suggestion();
 });
-
+$routes->post('/ehdotus', function () {
+      DrinkArchiveController::suggestion2();
+});
 $routes->get('/tarkastelu/:id', function($id){
   DrinkArchiveController::fetchDetails($id);
 });

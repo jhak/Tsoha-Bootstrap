@@ -1,18 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<script>
-var amount = 0;
-document.getElementById("bt1").onclick = function() {
-	
-	var form = document.getElementById('lisaysform');
-	form.innerHTML = form.innerHTML + '<tr><td><input class="form-control" name="ingrd_name'+amount+'" placeholder="Ainesosa" type="text"></td><td><input class="form-control" name="amount'+amount+'" placeholder="Määrä" type="text"><input class="form-control" name="amount_type'+amount+'" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td>';
-}
-document.getElementById("bt2").onclick = function() {
-	
-	var form = document.getElementById('lisaysform');
-	form.innerHTML = form.innerHTML - '<tr><td><input class="form-control" name="ingrd_name'+(amount-1)+'" placeholder="Ainesosa" type="text"></td><td><input class="form-control" name="amount'+(amount-1)+'" placeholder="Määrä" type="text"><input class="form-control" name="amount_type'+(amount-1)+'" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td>';
-}
-</script>
+
 <H1> Muokkaa tietoja: </H1>
 
     <div class="form-group">
@@ -28,23 +16,38 @@ document.getElementById("bt2").onclick = function() {
     </thead>
 
     <tbody>
-    <form id="lisaysform" method = "post" action="">
-      <input class="form-control" name="drink_id" value="{{drink.drink_id}}" type="text">
+    <form id="lisaysform" method = "post" action="{{base_path}}/ehdotus">
+      <input class="form-control" name="drink_name" placeholder="drinkin nimi" type="text">
       <tr>
-        <td><input class="form-control" name="ingrd_name" placeholder="Ainesosa" type="text"></td>
-        <td><input class="form-control" name="amount" placeholder="Määrä" type="text"><input class="form-control" name="amount_type" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
+        <td><input class="form-control" name="ingrd_name1" placeholder="Ainesosa" type="text"></td>
+        <td><input class="form-control" name="amount1" placeholder="Määrä" type="text"><input class="form-control" name="amount_type1" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
       </tr>
+	  <tr>
+        <td><input class="form-control" name="ingrd_name2" placeholder="Ainesosa" type="text"></td>
+        <td><input class="form-control" name="amount2" placeholder="Määrä" type="text"><input class="form-control" name="amount_type2" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
+      </tr>
+	  <tr>
+        <td><input class="form-control" name="ingrd_name3" placeholder="Ainesosa" type="text"></td>
+        <td><input class="form-control" name="amount3" placeholder="Määrä" type="text"><input class="form-control" name="amount_type3" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
+      </tr>
+	  <tr>
+        <td><input class="form-control" name="ingrd_name4" placeholder="Ainesosa" type="text"></td>
+        <td><input class="form-control" name="amount4" placeholder="Määrä" type="text"><input class="form-control" name="amount_type4" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
+      </tr>
+	  <tr>
+        <td><input class="form-control" name="ingrd_name5" placeholder="Ainesosa" type="text"></td>
+        <td><input class="form-control" name="amount5" placeholder="Määrä" type="text"><input class="form-control" name="amount_type5" placeholder="Yksikkö(kpl,cl,dl,tl,rl,ml)" type="text"></td> 
+      </tr>
+	  
     </form>
+		
 	<label>Valmistusohje</label>
       <textarea class="form-control"> ---Valmistusohje ----
       </textarea>
-	  <th><button type="button" id="bt1" class="btn btn-primary" >Lisää toinen aines</button></th>
-	  <th><button type="button" id="bt2" class="btn btn-primary" >Poista aines</button></th>
-	  <th><button type="submit" class="btn btn-primary">Lähetä</button></th>
+	  <th><button type="submit" class="btn btn-primary" form="lisaysform">Lähetä</button></th>
     </tbody>
   </table>
     </div>
 
- 
 
 {% endblock %}

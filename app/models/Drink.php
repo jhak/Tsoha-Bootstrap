@@ -9,9 +9,9 @@ class Drink extends BaseModel{
   }
   
 	public function add() {
-    $query = DB::connection()->prepare('INSERT INTO Drink ( $drink_id, $usr_id, $name) VALUES (:drink_id, :usr_id, :name) RETURNING drink_id');
+    $query = DB::connection()->prepare('INSERT INTO Drink (name,usr_id) VALUES (:name, :usr_id) RETURNING drink_id');
     
-    $query->execute(array('ingrd_name' => $this->ingrd_name, 'drink_id' => $this->drink_id, 'amount' => $this->amount, 'amount_type' => $this->amount_type));
+    $query->execute(array('name' => $this->name,'usr_id'=> '1'));
 
     $row = $query->fetch();
     
