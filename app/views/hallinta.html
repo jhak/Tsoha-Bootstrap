@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Drinkit</h1>
-    {% if 'Virhe:' in message %}
+  <h1>Hallinta</h1>
+	  {% if 'Virhe:' in message %}
 	<div class="alert alert-danger">
 	  <ul>
 		  <li>{{message}}</li>
@@ -18,9 +18,8 @@
 	{% endif %}
   <p>
     <a href="#" class="btn btn-success" onclick="window.location.href = '{{base_path}}/ehdotus'">Ehdota drinkkiä</a>  
-    <input class="btn btn-success" value="Tyhjennä rajaukset" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus'">
+    <input class="btn btn-success" value="Tyhjennä haku" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus'">
     <input class="btn btn-success" value="Hae" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus?srch='+ document.getElementById('hakukentta').value;">
-    
   </p>
 
   <div class="form-group">
@@ -31,21 +30,21 @@
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
-        
         <th>Nimi</th>
         <th>Ainesosat</th>
         <th>Luontipäivä</th>
         <th>Lisääjä</th>
         <th></th>
+		<th></th>
+		<th></th>
       </tr>
     </thead>
 {% if srch %}
     <tbody>
       {% for drink in drinks %}
-      {% if drink.approved == true %}
+      
       {% if drink.name in srch %}
       <tr>
-        
         <td><a href="{{base_path}}/tarkastelu/{{drink.drink_id}}">{{drink.name}}</a></td>
         <td>{% for ingredient in ingredients %} 
           {% if ingredient.drink_id == drink.drink_id %}
@@ -59,18 +58,16 @@
               {{Usraccount.usr_name}} 
           {% endif %}
         {% endfor %}</td>
-        {% if (drink.drink_id == curusr.usr_id or curusr.isadm == 1) %}
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
-        {% endif %}
       </tr>
       {% endif %}
-      {% endif %}
+      
       {% endfor %}
     </tbody>
 {% else %}
     <tbody>
       {% for drink in drinks %}
-      {% if drink.approved == true %}
+      
       <tr>
         <td><a href="{{base_path}}/tarkastelu/{{drink.drink_id}}">{{drink.name}}</a></td>
         <td>{% for ingredient in ingredients %} 
@@ -85,14 +82,39 @@
               {{Usraccount.usr_name}} 
           {% endif %}
         {% endfor %}</td>
-        {% if (drink.drink_id == curusr.usr_id or curusr.isadm == 1) %}
+        
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
-        {% endif %}
+		<th><a class="btn btn-default btn-sm" href="{{base_path}}/poistad/{{drink.drink_id}}">Poista</a></th>
+		{% if drink.approved == false %}
+			<th><a class="btn btn-default btn-sm" href="{{base_path}}/hyvaksy/{{drink.drink_id}}">Hyväksy</a></th>
+		{% endif %}
       </tr>
-      {% endif %}
+      
       {% endfor %}
     </tbody>
 {% endif %}
-  </table>
-
-{% endblock %}
+ </table>
+  <h1> Käyttäjät </h1>
+ <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nimi</th>
+        <th>Ylläpitäjä</th>
+        <th></th>
+        
+      </tr>
+    </thead>
+	<tbody>
+		{% for Usraccount in Usraccounts %}
+		<tr>
+			<td>{{Usraccount.usr_id}}</td>
+			<td>{{Usraccount.usr_name}}</td>
+			<td>{{Usraccount.isadm}}</td>
+			<td><a class="btn btn-default btn-sm" href="{{base_path}}/poistau/{{Usraccount.usr_id}}">Poista</a></td>
+		</tr>
+		{% endfor %}
+	</tbody>
+ </table>
+ 
+ {% endblock %}

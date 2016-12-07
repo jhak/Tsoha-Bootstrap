@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Drinkit</h1>
+  <h1>Suosikit</h1>
     {% if 'Virhe:' in message %}
 	<div class="alert alert-danger">
 	  <ul>
@@ -16,10 +16,9 @@
 	</div>
 						
 	{% endif %}
-  <p>
-    <a href="#" class="btn btn-success" onclick="window.location.href = '{{base_path}}/ehdotus'">Ehdota drinkkiä</a>  
-    <input class="btn btn-success" value="Tyhjennä rajaukset" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus'">
-    <input class="btn btn-success" value="Hae" type="button" onclick="window.location.href = '{{base_path}}/drinkkilistaus?srch='+ document.getElementById('hakukentta').value;">
+  <p> 
+    <input class="btn btn-success" value="Tyhjennä rajaukset" type="button" onclick="window.location.href = '{{base_path}}/suosikit'">
+    <input class="btn btn-success" value="Hae" type="button" onclick="window.location.href = '{{base_path}}/suosikit?srch='+ document.getElementById('hakukentta').value;">
     
   </p>
 
@@ -42,6 +41,8 @@
 {% if srch %}
     <tbody>
       {% for drink in drinks %}
+	  {% for followed in followeds %}
+		{%if drink.drinkid == followed.followed_id %}
       {% if drink.approved == true %}
       {% if drink.name in srch %}
       <tr>
@@ -65,11 +66,15 @@
       </tr>
       {% endif %}
       {% endif %}
+	  {%endif%}
+	  {%endfor%}
       {% endfor %}
     </tbody>
 {% else %}
     <tbody>
       {% for drink in drinks %}
+	  {% for followed in followeds %}
+		{%if drink.drinkid == followed.followed_id %}
       {% if drink.approved == true %}
       <tr>
         <td><a href="{{base_path}}/tarkastelu/{{drink.drink_id}}">{{drink.name}}</a></td>
@@ -90,6 +95,8 @@
         {% endif %}
       </tr>
       {% endif %}
+	  {%endif%}
+	  {%endfor%}
       {% endfor %}
     </tbody>
 {% endif %}

@@ -1,13 +1,28 @@
      {% extends "base.html" %}
 
       {% block content %}
-      <form class="form-signin">
+        {% if 'Virhe:' in message %}
+	<div class="alert alert-danger">
+	  <ul>
+		  <li>{{message}}</li>
+	  </ul>
+	</div>
+	{% elseif message !='' %}
+
+	<div class="alert alert-success">
+	  <ul>
+			<li>{{message}}</li>
+		</ul>
+	</div>
+						
+	{% endif %}
+      <form class="form-signin" method="post" action="{{base_path}}/login">
         <h2 class="form-signin-heading">Tunnistaudu käyttääksesi järjestelmää</h2>
         <div class="col-xs-4">
           <label for="usrname" class="sr-only">Käyttäjätunnus</label>
-          <input type="username" id="usrname" class="form-control" placeholder="Käyttäjätunnus" required autofocus>
+          <input type="username" name="usrn" id="usrn" class="form-control" placeholder="Käyttäjätunnus" required autofocus>
           <label for="inputPassword" class="sr-only">Salasana</label>
-          <input type="password" id="inputPassword" class="form-control" placeholder="Salasana" required>
+          <input type="password" name="pwd" id="pwd" class="form-control" placeholder="Salasana" required>
           <button class="btn btn-lg btn-primary btn-block" type="submit">Kirjaudu sisään</button>
           <br>
           <p> Jos olet uusi käyttäjä, tunnuksesi tallennetaan ensimäisen kirjautumisen yhteydessä </p>

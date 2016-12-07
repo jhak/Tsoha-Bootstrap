@@ -2,6 +2,19 @@
 {% block content %}
 <H1>{{drink.name}}</H1>
   <p><b>Lisääjä:</b> {{Usraccount.usr_name}}</p>
+        
+        {%if followed == false %}
+      <form id="addfav" method = "post" action="{{base_path}}/addfav">
+      <input class="hidden" name="drink_id" value="{{drink.drink_id}}" type="text">
+      <button type="submit" class="btn btn-primary">Lisää suosikiksi</button>
+    </form>
+        {%else%}
+        <form id="delfav" method = "post" action="{{base_path}}/delFav">
+      <input class="hidden" name="drink_id" value="{{drink.drink_id}}" type="text">
+      <button type="submit" class="btn btn-primary">Poista suosikeista</button>
+    </form>
+        {%endif%}
+    
   <form> 
       <table class="table table-striped table-bordered">
     <thead>
@@ -21,7 +34,9 @@
   </table>
     <div class="form-group">
       <label>Valmistusohje</label>
-     <p class="info">---Valmistusohje ----</p>
+     <p class="info">   
+          {{Preparation.prep_text}}
+     </p>
     </div>
   </form>
 {% endblock %}
