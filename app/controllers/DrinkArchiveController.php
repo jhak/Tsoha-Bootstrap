@@ -348,7 +348,7 @@ class DrinkArchiveController extends BaseController{
 
     
     $usr=Usraccount::getName($_SESSION['user']);
-    if($usr->isadm == 1){
+    if($usr->isadm ===1){
         View::make('hallinta.html', array('drinks' => $drinks, 'ingredients' => $ingredients, 'Usraccounts' => $Usraccounts, 'srch' => $srch,'curusr'=> $curusr));
     }else{
       Redirect::to('/drinkkilistaus');

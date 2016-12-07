@@ -1,4 +1,4 @@
-INSERT INTO Usraccount (usr_name,usr_password) VALUES ('admin','admpwd');
+INSERT INTO Usraccount (usr_name,usr_password,isadm) VALUES ('admin','admpwd',1);
 INSERT INTO Usraccount (usr_name,usr_password) VALUES ('test_usr','testpw');
 INSERT INTO Usraccount (usr_name,usr_password) VALUES ('test_usr2','testpw2');
 

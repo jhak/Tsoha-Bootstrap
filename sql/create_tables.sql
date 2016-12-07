@@ -2,7 +2,7 @@ CREATE TABLE Usraccount(
         usr_id SERIAL PRIMARY KEY,
         usr_name varchar(50) NOT NULL,
         usr_password varchar(50) NOT NULL,
-        isadm boolean DEFAULT false
+        isadm integer DEFAULT 0
 );
 
 CREATE TABLE Drink(
@@ -34,5 +34,5 @@ CREATE TABLE Followed(
 
 
 
-                                                              37,0-1        Bot
+                                                              
 

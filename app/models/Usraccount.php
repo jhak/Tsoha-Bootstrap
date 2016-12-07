@@ -24,7 +24,7 @@ class Usraccount extends BaseModel{
 	public static function delete($id){
 			
 		$usr=Usraccount::getName($_SESSION['user']);
-		if($usr->isadm == 1){
+		if($usr->isadm === 1){
 			$query = DB::connection()->prepare('Delete FROM Usraccount where usr_id = :id');
 			$query->execute(array('id' => $id));
 		}
@@ -55,6 +55,7 @@ public static function newUser($usr_name,$usr_password){
 			'usr_id'=>$row['usr_id'],
 			'usr_name'=>$usr_name,
 			'usr_password'=>$usr_password
+			
 		));
 		return $usracc;
 	  }

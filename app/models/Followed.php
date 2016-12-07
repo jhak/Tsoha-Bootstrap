@@ -37,7 +37,7 @@ class Followed extends BaseModel{
     $rows = $query->fetchAll();
     $followed = array();
     foreach($rows as $row){
-      $followeds[] = new Followed(array(
+      $followed[] = new Followed(array(
         'follower_id' => $row['follower_id'],
         'followed_id' => $row['followed_id']
       ));

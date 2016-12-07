@@ -22,7 +22,7 @@
 		public static function delete($id){
 			
 			$usr=Usraccount::getName($_SESSION['user']);
-			if($usr->isadm == 1){
+			if($usr->isadm === 1){
 		  $query = DB::connection()->prepare('Delete FROM Drink where drink_id = :id');
 		  $query->execute(array('id' => $id));
 			}
@@ -31,7 +31,7 @@
 		public static function approve($id){
 			
 			$usr=Usraccount::getName($_SESSION['user']);
-			if($usr->isadm == 1){
+			if($usr->isadm = true){
 		  $trg = Drink::find($id);
 		  $query = DB::connection()->prepare('UPDATE Drink SET approved = true WHERE drink_id = :id');
 		  $query->execute(array('id' => $trg->drink_id));

@@ -59,7 +59,7 @@
               {{Usraccount.usr_name}} 
           {% endif %}
         {% endfor %}</td>
-        {% if (drink.drink_id == curusr.usr_id or curusr.isadm == 1) %}
+        {% if (drink.usr_id == curusr.usr_id or curusr.isadm == true) %}
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
         {% endif %}
       </tr>
@@ -85,7 +85,7 @@
               {{Usraccount.usr_name}} 
           {% endif %}
         {% endfor %}</td>
-        {% if (drink.drink_id == curusr.usr_id or curusr.isadm == 1) %}
+        {% if (drink.usr_id == curusr.usr_id or curusr.isadm == true) %}
         <th><a class="btn btn-default btn-sm" href="{{base_path}}/muokkaus/{{drink.drink_id}}">Muokkaa</a></th>
         {% endif %}
       </tr>
