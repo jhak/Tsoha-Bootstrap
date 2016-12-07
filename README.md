@@ -4,7 +4,8 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://jehajeha.users.cs.helsinki.fi/drinkkiarkisto/)
 * [Linkki dokumentaatiooni](https://github.com/jhak/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
-tunnukset: admin admpwd / tai mikä tahansa nimimerkki/salasana -pari
+
+<p>tunnukset: admin admpwd / tai mikä tahansa nimimerkki/salasana -pari</p>
 
 ## Työn aihe
 
