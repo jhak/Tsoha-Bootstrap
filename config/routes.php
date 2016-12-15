@@ -9,7 +9,7 @@
   });
 */
   $routes->get('/', function() {
-    DrinkArchiveController::logonpage();
+    ListController::logonpage();
   });
 /*
   $routes->get('/drinkkilistaus', function() {
@@ -18,12 +18,12 @@
 
   $routes->get('/drinkkilistaus', function () use ($routes) {
           $srch = $routes->request()->params('srch');
-          DrinkArchiveController::drinklist($srch);
+          ListController::drinklist($srch);
 });
   
     $routes->get('/suosikit', function () use ($routes) {
           $srch = $routes->request()->params('srch');
-          DrinkArchiveController::drinklistFav($srch);
+          ListController::drinklistFav($srch);
 });
 
     $routes->post('/addIngrd', function () {
@@ -89,13 +89,13 @@ $routes->get('/suunnitelmat/login', function() {
 });
 
 $routes->post('/login', function() {
-  DrinkArchiveController::performLogin();
+  ListController::performLogin();
 });
 $routes->post('/hallinta', function() {
   DrinkArchiveController::hallinta();
 });
 $routes->post('/logout', function(){
-  DrinkArchiveController::logout();
+  ListController::logout();
 });
 $routes->get('/suunnitelmat/muokkaus', function() {
   HelloWorldController::muokkaus();

@@ -18,7 +18,7 @@
     }
     
     public static function isStringValid($string){
-      if(preg_match("/^[a-zA-Z0-9]+$/i",$string)){
+      if(preg_match("/^[a-zA-ZäöåÄÖÅ 0-9]+$/i",$string)){
         return true;
       }
       return false;

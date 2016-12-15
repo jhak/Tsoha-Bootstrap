@@ -1,35 +1,13 @@
 <?php
- //TODO: paloittele
+ 
 require 'app/models/Drink.php';
 require 'app/models/Ingredient.php';
 require 'app/models/Usraccount.php';
 require 'app/models/Preparation.php';
 require 'app/models/Followed.php';
 class DrinkArchiveController extends BaseController{
-  // ...
-  public static function drinklist($srchh){
-    self::check_logged_in();
-    $srch = $srchh;
-    $drinks = Drink::all();
-    $ingredients = Ingredient::all();
-    $Usraccounts = Usraccount::fetchNames();
-    $Followeds = Followed::allForId($_SESSION['user']);
-    $curusr = Usraccount::getName($_SESSION['user']);
-    View::make('drinkkilistaus.html', array('drinks' => $drinks, 'ingredients' => $ingredients, 'Usraccounts' => $Usraccounts, 'srch' => $srch,'curusr'=> $curusr,'followeds'=>$Followeds));
-  }
   
-    public static function drinklistFav($srchh){
-    self::check_logged_in();
-    $srch = $srchh;
-    $drinks = Drink::all();
-    $ingredients = Ingredient::all();
-    $Usraccounts = Usraccount::fetchNames();
-    $Followeds = Followed::allForId($_SESSION['user']);
-    $curusr = Usraccount::getName($_SESSION['user']);
-    View::make('suosikit.html', array('drinks' => $drinks, 'ingredients' => $ingredients, 'Usraccounts' => $Usraccounts, 'srch' => $srch,'curusr'=> $curusr,'followeds'=>$Followeds));
-  }
-  
-
+// tarkastelu
   public static function fetchDetails($drink_id){
     self::check_logged_in();
     $drink = Drink::find($drink_id);
@@ -39,7 +17,7 @@ class DrinkArchiveController extends BaseController{
     $Followed = Followed::isFollowed($_SESSION['user'],$drink_id);
     View::make('tarkastelu.html', array('drink' => $drink, 'ingredients' => $ingredients, 'Usraccount' => $Usraccount,'Preparation'=>$preparation,'followed'=>$Followed));  
   }
-
+//tiedot muokkausnäkymään
     public static function fetchDetailsMod($drink_id){
     self::check_logged_in();
     
@@ -51,7 +29,7 @@ class DrinkArchiveController extends BaseController{
     $Usraccount = Usraccount::getName($drink -> usr_id);
     View::make('muokkaus.html', array('drink' => $drink, 'ingredients' => $ingredients, 'Usraccount' => $Usraccount, 'Preparation'=>$preparation));
   }
-  
+ //ehdotuksen rekisteröinti 
   public static function suggestion2(){
      self::check_logged_in();  
     $params = $_POST;
@@ -201,12 +179,12 @@ class DrinkArchiveController extends BaseController{
 
   }
   
-  
+  //ehdotuksen näkymä
     public static function suggestion(){
        self::check_logged_in();
         View::make('ehdotus.html');
   }
-  
+// ainesosan poisto  
   public static function delIngrd(){
     self::check_logged_in();
     $params = $_POST;
@@ -215,7 +193,7 @@ class DrinkArchiveController extends BaseController{
 
     Redirect::to('/muokkaus/' . $params['drink_id']);
   }
-  
+  // suosikin lisäys
     public static function addFav(){
     self::check_logged_in();
     $params = $_POST;
@@ -227,7 +205,7 @@ class DrinkArchiveController extends BaseController{
 
     Redirect::to('/tarkastelu/' . $params['drink_id']);
   }
-  
+  // suosikin poisto
   public static function delFav(){
     self::check_logged_in();
     $params = $_POST;
@@ -237,7 +215,7 @@ class DrinkArchiveController extends BaseController{
   }
   
   
-  
+  // ainesosan lisäys
   public static function addNewIngrd(){
     self::check_logged_in();
     $params = $_POST;
@@ -264,7 +242,7 @@ class DrinkArchiveController extends BaseController{
     }
     Redirect::to('/muokkaus/' . $ingredient->drink_id ,array('message'=>$msg));
   }
-  
+  // valmistusohjeen asettaminen
   public static function setPrepText(){
     self::check_logged_in();
     $msg ='';
@@ -276,7 +254,7 @@ class DrinkArchiveController extends BaseController{
     }
     Redirect::to('/muokkaus/' . $params['drink_id'], array('message'=>$msg));
   }
-  
+  //drinkin nimen muuttaminen
     public static function updateDrinkName(){
       self::check_logged_in();
     $params = $_POST;
@@ -288,55 +266,27 @@ class DrinkArchiveController extends BaseController{
     }
     Redirect::to('/muokkaus/' . $params['drink_id'],array('message'=>$msg));
   }
-  
-    public static function logout(){
-    self::check_logged_in();
-    $_SESSION['user'] = null;
-    Redirect::to('/', array('message' => 'Olet kirjautunut ulos!'));
-  }
 
-    public static function logonPage(){
-    
-    if(isset($_SESSION['user'])){
-      Redirect::to('/drinkkilistaus');
-    }
-    
-    View::make('loginpage.html');
-  }
-   public static function performLogin(){
-    
-    $params = $_POST;
-    $user=NULL;
-     if(self::isStringValidEx($params['usrn'],'50') && self::isStringValidEx($params['usrn'],'50')){
-    $user = Usraccount::auth($params['usrn'], $params['pwd']);
-     }
-    if($user === NULL){
-      View::make('loginpage.html', array('message' => 'Virhe: Väärä käyttäjätunnus tai salasana tai uusi tunnus sisältää kiellettyjä merkkejä'));
-    }else{
-      $_SESSION['user'] = $user->usr_id;
 
-      Redirect::to('/drinkkilistaus', array('message' => ''));
-    }
-  }
-  
+  //käyttäjän poisto
   public static function delUsr($id){
       self::check_logged_in();
       Usraccount::delete($id);
       Redirect::to('/hallinta');
   }
-  
+  // drinkkiehdotuksen hyväksyntä
    public static function approve($id){
     self::check_logged_in();
       Drink::approve($id);
       Redirect::to('/hallinta');
   }
-  
+  // drinkin poisto
      public static function delDrink($id){
       self::check_logged_in();
       Drink::delete($id);
       Redirect::to('/hallinta');
   }
-  
+  // hallinta näkymä ylläpitäjälle 
   public static function hallinta($srchh){
     self::check_logged_in();
     
