@@ -7,7 +7,7 @@ class Usraccount extends BaseModel{
   public function __construct($attributes){
     parent::__construct($attributes);
   }
-
+//käyttäjän tietojen nouto kannasta, muuttujat: id - käyttäjän id
   public static function getName($id){
     $query = DB::connection()->prepare('SELECT * FROM Usraccount WHERE usr_id = :id LIMIT 1');
       $query->execute(array('id' => $id));
@@ -20,7 +20,7 @@ class Usraccount extends BaseModel{
   }
   return null;
 }
-
+//käyttäjän poisto - muuttujat: id - poistettavan käyttäjän id
 	public static function delete($id){
 			
 		$usr=Usraccount::getName($_SESSION['user']);
@@ -30,7 +30,8 @@ class Usraccount extends BaseModel{
 		}
     }
 
-
+//nimen varauksen tarkistukseen - muuttujat: name - etsittävät nimi
+//palautus null jos käyttäjää ei kyseisellä nimellä ole, muutoin palautetaan löydetty käyttäjä
   public static function nameExists($name){
     $query = DB::connection()->prepare('SELECT * FROM Usraccount WHERE usr_name = :name LIMIT 1');
       $query->execute(array('name' => $name));
@@ -43,7 +44,7 @@ class Usraccount extends BaseModel{
   }
   return null;
 }
-
+// uuden käyttäjän lisäys kantaan - muuttujat: usr_name - uuden käyttäjän nimi, usr_password - uuden käyttäjän salasana
 public static function newUser($usr_name,$usr_password){
 	$tmp=self::nameExists($usr_name);
 	if(!($tmp)){
@@ -63,7 +64,7 @@ public static function newUser($usr_name,$usr_password){
 	return null;
 	
 }
-
+//autentikointi - muuttujat: usrnm - käyttäjän nimi, usrpw - käyttäjän salasana.
   public static function auth($usrnm,$usrpw){
 	
 	  $query = DB::connection()->prepare('SELECT * FROM Usraccount WHERE usr_name = :usr_name LIMIT 1');
@@ -82,7 +83,7 @@ public static function newUser($usr_name,$usr_password){
   return self::newUser($usrnm,$usrpw);
 	
   }
-
+//kokonaisulkoistus käyttäjien nimistä
   public static function fetchNames(){
 
     $query = DB::connection()->prepare('SELECT * FROM usraccount');

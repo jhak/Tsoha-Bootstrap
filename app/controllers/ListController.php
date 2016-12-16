@@ -5,8 +5,9 @@ require 'app/models/Ingredient.php';
 require 'app/models/Usraccount.php';
 require 'app/models/Preparation.php';
 require 'app/models/Followed.php';
+
 class ListController extends BaseController{
-  // pääsivun listaus
+  // pääsivun listaus - Muuttujat: srchh - hakusana palautteen filtteröintiä varten.
   public static function drinklist($srchh){
     self::check_logged_in();
     $srch = $srchh;
@@ -17,7 +18,7 @@ class ListController extends BaseController{
     $curusr = Usraccount::getName($_SESSION['user']);
     View::make('drinkkilistaus.html', array('drinks' => $drinks, 'ingredients' => $ingredients, 'Usraccounts' => $Usraccounts, 'srch' => $srch,'curusr'=> $curusr,'followeds'=>$Followeds));
   }
-  //suosikkejen listaus
+  //suosikkejen listaus - Muuttujat: srchh - hakusana palautteen filtteröintiä varten.
     public static function drinklistFav($srchh){
     self::check_logged_in();
     $srch = $srchh;

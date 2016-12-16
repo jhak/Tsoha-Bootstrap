@@ -8,7 +8,7 @@ class Ingredient extends BaseModel{
     parent::__construct($attributes);
   }
 
-
+//drinkin ainesosien nouto kannasta - muuttujat: id - drinkin_id jolle ainesosia halutaan etsiä
     public static function findAllFor($id){
     $query = DB::connection()->prepare('SELECT * FROM Ingredient where drink_id = :id');
     $query->execute(array('id' => $id));
@@ -26,7 +26,7 @@ class Ingredient extends BaseModel{
       }
       return $ingredients;
     }
-
+//ainesosien kokonaisulkoistus
     public static function All(){
     $query = DB::connection()->prepare('SELECT * FROM Ingredient');
     $query->execute();
@@ -44,13 +44,13 @@ class Ingredient extends BaseModel{
       }
       return $ingredients;
     }
-
+// aineosan poisto kannasta - Muuttujat: id - ainesosan id
     public static function delete($id){
       $query = DB::connection()->prepare('Delete FROM Ingredient where ingrd_id = :id');
       $query->execute(array('id' => $id));
 
     }
-
+// ainesosan lisäys kantaan
     public function add() {
     $query = DB::connection()->prepare('INSERT INTO Ingredient (ingrd_name, drink_id, amount, amount_type) VALUES (:ingrd_name, :drink_id, :amount, :amount_type) RETURNING ingrd_id');
     

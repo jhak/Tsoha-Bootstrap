@@ -7,7 +7,7 @@ require 'app/models/Preparation.php';
 require 'app/models/Followed.php';
 class DrinkArchiveController extends BaseController{
   
-// tarkastelu
+// tarkastelu - Muuttujat: drink_id - haluttavan drinkin ID
   public static function fetchDetails($drink_id){
     self::check_logged_in();
     $drink = Drink::find($drink_id);
@@ -17,7 +17,7 @@ class DrinkArchiveController extends BaseController{
     $Followed = Followed::isFollowed($_SESSION['user'],$drink_id);
     View::make('tarkastelu.html', array('drink' => $drink, 'ingredients' => $ingredients, 'Usraccount' => $Usraccount,'Preparation'=>$preparation,'followed'=>$Followed));  
   }
-//tiedot muokkausnäkymään
+//tiedot muokkausnäkymään - Muuttujat: drink_id - haluttavan drinkin ID
     public static function fetchDetailsMod($drink_id){
     self::check_logged_in();
     
@@ -268,25 +268,25 @@ class DrinkArchiveController extends BaseController{
   }
 
 
-  //käyttäjän poisto
+  //käyttäjän poisto - Muuttujat: id - poistettavan käyttäjän ID
   public static function delUsr($id){
       self::check_logged_in();
       Usraccount::delete($id);
       Redirect::to('/hallinta');
   }
-  // drinkkiehdotuksen hyväksyntä
+  // drinkkiehdotuksen hyväksyntä - Muuttujat: id - hyväksyttävän drinkin ID
    public static function approve($id){
     self::check_logged_in();
       Drink::approve($id);
       Redirect::to('/hallinta');
   }
-  // drinkin poisto
+  // drinkin poisto - Muuttujat: id - poistettavan drinkin ID
      public static function delDrink($id){
       self::check_logged_in();
       Drink::delete($id);
       Redirect::to('/hallinta');
   }
-  // hallinta näkymä ylläpitäjälle 
+  // hallinta näkymä ylläpitäjälle - Muuttujat: srchh - hakusana palautteen filtteröintiä varten
   public static function hallinta($srchh){
     self::check_logged_in();
     

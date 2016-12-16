@@ -7,7 +7,7 @@ class Preparation extends BaseModel{
   public function __construct($attributes){
     parent::__construct($attributes);
   }
-  
+  //valmistusohjeen lisäys drinkille
 	public function add() {
     $query = DB::connection()->prepare('INSERT INTO Preparation (drink_id,prep_text) VALUES (:drink_id, :prep_text) RETURNING prep_id');
     
@@ -18,7 +18,7 @@ class Preparation extends BaseModel{
     $this->prep_id = $row['prep_id']; 
 
     }
-
+//valmistusohjeen etsintä drinkille - Muuttujat: id - drinkin id jolle ohje halutaan noutaa
     public static function find($id){
       $query = DB::connection()->prepare('SELECT * FROM Preparation WHERE drink_id = :id LIMIT 1');
       $query->execute(array('id' => $id));
@@ -32,13 +32,13 @@ class Preparation extends BaseModel{
       }
       return null;
     }
-	
+//valmistusohjeen päivitys - Muuttujat: id - drinkin id jonka ohjetta halutaan päivittää, prptxt - uusi ohjeteksti
 	public static function updateText($id,$prptxt){
 	  $trg = Preparation::find($id);
 	  $query = DB::connection()->prepare('UPDATE Preparation SET prep_text = :ntxt WHERE drink_id = :id');
       $query->execute(array('id' => $trg->drink_id, 'ntxt'=>$prptxt));	
 	}
-
+//kokonaisulkoistus 
     public static function all(){
    
     $query = DB::connection()->prepare('SELECT * FROM Preparation');
